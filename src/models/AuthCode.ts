@@ -4,11 +4,6 @@ import AuthUtils from '../utils/AuthUtils';
 import { Model } from '../utils/constants';
 import { BaseModel } from '../utils/types';
 
-/**
- * (1.01) TODO:
- * - Read this interface.
- * - Delete this comment once you've done so.
- */
 interface IAuthCode extends BaseModel {
   /**
    * Phone number in which the OTP code is associated with.
@@ -39,20 +34,26 @@ const authCodeSchema: Schema<AuthCodeDocument> = new Schema<AuthCodeDocument>(
    */
   {
     // Here's an example of how to add a field to the schema.
-    exampleField: { required: true, type: String, unique: false }
+    phoneNumber: { required: true, type: String, unique: true },
+    value: {
+      default: AuthUtils.generateOTP,
+      required: true,
+      type: Number
+    }
   },
   { timestamps: true }
 );
 
 /**
  * (1.04) TODO:
- * - Add a line of code here that will elete every document in the "AuthCode"
+ * - Add a line of code here that will delete every document in the "AuthCode"
  * collection after 5 minutes (60 seconds * 5).
  * - To be very clear, the only way you're going to figure this out is by
  * Googling around for the answer. The solution is one line.
  * - Once you find something, add the code to this document and include a link
  * to the code you found in a comment.
  * */
+authCodeSchema.index({ createdAt: 1 }, { expiredAfterSeconds: 60 * 5 });
 
 const AuthCode: mongoose.Model<AuthCodeDocument> =
   mongoose.model<AuthCodeDocument>(Model.AUTH_CODE, authCodeSchema);

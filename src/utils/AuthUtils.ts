@@ -14,7 +14,21 @@ const generateOTP = (): number => {
    * - Make sure tall the tests pass.
    * - Delete this comment.
    */
-  return 123456;
+  // generate int = Math.random() * (6 - 1) + 1;
+  // return generate;
+
+  // Generate a number between 0 and 1.
+  const randomFraction: number = Math.random();
+
+  // Multiply that number 900000
+  const sixDigitNumber: number = randomFraction * 900000;
+
+  // Get rid of the decimal.
+  const sixDigitWholeNumber: number = Math.floor(sixDigitNumber);
+
+  // Return the 6-digit number.
+
+  return sixDigitWholeNumber + 100000;
 };
 
 /**
