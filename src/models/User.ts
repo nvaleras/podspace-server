@@ -34,7 +34,7 @@ interface IUser extends BaseModel {
    */
   linkedInUrl?: string;
 
-  phoneNumber: string;
+  phoneNumber?: string;
 
   /**
    * Key of the object in the Digital Ocean Spaces bucket that hosts the
@@ -71,7 +71,6 @@ const userSchema: Schema<UserDocument> = new Schema<UserDocument>(
      * (2.02) TODO:
      * - Create the schema for the Users that we'll save in the database using
      * the interface above as a reference.
-     * - Delete this comment and the example field.
      * - Add comment(s) to explain your work.
      */
     email: { required: false, sparse: true, type: String, unique: true },
@@ -104,7 +103,6 @@ type TokenArgs = {
 /**
  * (2.03) TODO:
  * - Read the below function and try to explain to yourself what's going on!
- * - Delete this comment.
  */
 /**
  * Creates and returns a new access and refresh token for the user. It also
