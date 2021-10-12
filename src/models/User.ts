@@ -8,7 +8,6 @@ import { AuthTokens, BaseModel } from '../utils/types';
 /**
  * (2.01) TODO:
  * - Read this interface.
- * - Delete this comment once you've done so.
  */
 interface IUser extends BaseModel {
   email?: string;
@@ -75,7 +74,16 @@ const userSchema: Schema<UserDocument> = new Schema<UserDocument>(
      * - Delete this comment and the example field.
      * - Add comment(s) to explain your work.
      */
-    exampleField: { required: false, type: String, unique: false },
+    email: { required: false, sparse: true, type: String, unique: true },
+    firstName: { required: false, type: String, unique: false },
+    instagramUrl: { required: false, type: String, unique: false },
+    lastName: { required: false, type: String, unique: false },
+    linkedInUrl: { required: false, type: String, unique: false },
+    phoneNumber: { required: false, type: String, unique: true },
+    profilePictureKey: { required: false, type: String, unique: false },
+    profilePictureUrl: { required: false, type: String, unique: false },
+    twitterUrl: { required: false, type: String, unique: false },
+
 
     // We shouldn't be returning the refreshToken when fetching a user from
     // the database, since that is sensitive information.
