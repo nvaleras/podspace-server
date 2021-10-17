@@ -8,13 +8,10 @@ import { APP } from './constants';
  * all 0's.
  */
 const generateOTP = (): number => {
-  /**
-   * (1.02) TODO:
-   * - Implement this function.
-   * - Make sure tall the tests pass.
-   * - Delete this comment.
-   */
-  return 123456;
+  const randomFraction: number = Math.random();
+  const sixDigitNum: number = randomFraction * 900000;
+  const sixDigitWholeNum: number = Math.floor(sixDigitNum);
+  return sixDigitWholeNum + 100000;
 };
 
 /**
