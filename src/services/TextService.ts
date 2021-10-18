@@ -28,10 +28,7 @@ const sendText = async ({ message, to }: SendTextArgs): Promise<boolean> => {
   // to send while in development, simply comment out this line.
   if (!APP.IS_PRODUCTION) return true;
 
-  /**
-   * TODO: (6.03)
-   * - Send the {message} to {to} and return true if we successfully do so.
-   */
+  // Send the {message} to {to} and return true if we successfully do so.
 
   try {
     // Send the text
