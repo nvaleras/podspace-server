@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import mongoose, { Document, PopulatedDoc, Schema } from 'mongoose';
 
 import TextService from '../services/TextService';
@@ -59,11 +60,14 @@ const postSchema: Schema<PostDocument> = new Schema<PostDocument>(
 const sendNotification = async function (
   author: PopulatedDoc<UserDocument, {} & string>
 ) {
-  /**
-   * TODO: (6.04)
-   * - Send a text to all the users except for the author of this post letting
-   * them know that their podmate shared an update!
-   */
+  const allUsers: UserDocument[] = await User.find();
+
+  allUsers.map((user) => {
+    TextService.sendText({
+      message: 'One of your podmates shared a message!',
+      to: user.phoneNumber
+    });
+  });
 };
 
 postSchema.pre('save', function () {
