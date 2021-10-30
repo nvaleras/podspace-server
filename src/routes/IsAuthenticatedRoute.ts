@@ -13,8 +13,8 @@ export default class IsAuthenticatedRoute extends BaseRoute<boolean> {
        * - Fill in the path string with the appropriate path to this endpoint.
        * - Delete this comment.
        */
-      method: null,
-      path: '/'
+      method: RouteMethod.POST,
+      path: '/method'
     });
   }
 
