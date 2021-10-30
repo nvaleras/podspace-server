@@ -22,7 +22,6 @@ export default class IsAuthenticatedRoute extends BaseRoute<boolean> {
    */
   async content(req: ApplicationRequest): Promise<boolean> {
     const { accessToken, refreshToken } = req.cookies ?? {};
-
     return (
       AuthUtils.verifyToken(accessToken) || AuthUtils.verifyToken(refreshToken)
     );
