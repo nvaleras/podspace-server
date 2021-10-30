@@ -3,14 +3,7 @@ import AuthCode from '../models/AuthCode';
 import TextService from '../services/TextService';
 import TestUtils from '../utils/TestUtils';
 
-/**
- * TODO: (7.04)
- * - Remove the ".skip" from the following function.
- * - Go to your terminal and run the following command:
- *        npm run test LoginRoute
- * - Delete this comment.
- */
-describe.skip('POST /login', () => {
+describe('POST /login', () => {
   test('If the phone number is not valid, should return a 400.', async () => {
     await TestUtils.agent
       .post('/login')
