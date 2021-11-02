@@ -41,11 +41,8 @@ export default class GetPostRoute extends BaseRoute<PostDocument> {
    *  - reactions
    */
   async content(req: GetPostRequest): Promise<PostDocument> {
-    // TODO: (14.03) Get the post's id from the request parameters.
     const { id } = req.params;
-    // TODO: (14.03) Get the post with this id from our database.
     const post: PostDocument = await Post.findById(id);
-    // TODO: (14.03) Return the post!
     return post;
   }
 }
