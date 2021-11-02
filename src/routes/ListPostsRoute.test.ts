@@ -2,14 +2,7 @@ import { TEST_AUTH_COOKIE, TEST_USER } from '../../jest.setup';
 import Post from '../models/Post';
 import TestUtils from '../utils/TestUtils';
 
-/**
- * TODO: (15.06)
- * - Remove the ".skip" from the following function.
- * - Go to your terminal and run the following command:
- *        npm run test ListPosts
- * - Delete this comment.
- */
-describe.skip('GET /posts', () => {
+describe('GET /posts', () => {
   beforeAll(async () => {
     await Promise.all([
       Post.create({ author: TEST_USER._id, content: 'Hello!' }),

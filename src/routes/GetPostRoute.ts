@@ -42,7 +42,17 @@ export default class GetPostRoute extends BaseRoute<PostDocument> {
    */
   async content(req: GetPostRequest): Promise<PostDocument> {
     const { id } = req.params;
-    const post: PostDocument = await Post.findById(id);
+
+    const post: PostDocument = await Post.findById(id).populate([
+      {
+        model: Model.COMMENT,
+        path: 'comments',
+        populate: { model: Model.USER, path: 'author' }
+      },
+      { model: Model.REACTION, path: 'reactions' },
+      { model: Model.USER, path: 'author' }
+    ]);
+
     return post;
   }
 }

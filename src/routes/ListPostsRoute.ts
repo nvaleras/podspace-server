@@ -9,17 +9,9 @@ type ListPostsRequest = ApplicationRequest<{}, {}, PaginationOptions>;
 export default class ListPostsRoute extends BaseRoute<PostDocument[]> {
   constructor() {
     super({
-      /**
-       * TODO: (15.03)
-       * - Should the user be authenticated to hit this route?
-       * - Replace null with the correct route type from the RouteMethod enum
-       * in the constants.ts file.
-       * - Fill in the path string with the appropriate path to this endpoint.
-       * - Delete this comment.
-       */
-      authenticated: false,
-      method: null,
-      path: '/'
+      authenticated: true,
+      method: RouteMethod.POST,
+      path: '/posts'
     });
   }
 
@@ -36,14 +28,15 @@ export default class ListPostsRoute extends BaseRoute<PostDocument[]> {
    * .limit() and .skip() methods to fetch the appropriate documents.
    */
   async content(req: ListPostsRequest): Promise<PostDocument[]> {
-    // TODO: (15.04) Get the page and limit from the queries of the request.
+    const { page, limit } = req.query;
+    const limitAsNumber = Number(limit);
+    const pageAsNumber = Number(page);
 
-    // TODO: (15.04) Format the limit and page as numbers.
+    const posts: PostDocument[] = await Post.find()
+      .limit(limitAsNumber)
+      .skip(limitAsNumber * pageAsNumber)
+      .sort({ createdAt: -1 });
 
-    // TODO: (15.04) Find all of the posts within the range that we're looking
-    // for.
-
-    // TODO: (15.04) Return the list of posts by replacing the empty list below!
-    return [];
+    return posts;
   }
 }

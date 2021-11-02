@@ -2,14 +2,7 @@ import { TEST_AUTH_COOKIE } from '../../jest.setup';
 import User from '../models/User';
 import TestUtils from '../utils/TestUtils';
 
-/**
- * TODO: (15.05)
- * - Remove the ".skip" from the following function.
- * - Go to your terminal and run the following command:
- *        npm run test ListUsers
- * - Delete this comment.
- */
-describe.skip('GET /users', () => {
+describe('GET /users', () => {
   beforeAll(async () => {
     await Promise.all([
       User.create({ phoneNumber: '9095250112' }),
