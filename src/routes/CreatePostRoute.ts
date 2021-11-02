@@ -12,17 +12,9 @@ type CreatePostRequest = ApplicationRequest<IdArgs, CreatePostBody>;
 export default class CreatePostRoute extends BaseRoute<PostDocument> {
   constructor() {
     super({
-      /**
-       * TODO: (13.01)
-       * - Should the user be authenticated to hit this route?
-       * - Replace null with the correct route type from the RouteMethod enum
-       * in the constants.ts file.
-       * - Fill in the path string with the appropriate path to this endpoint.
-       * - Delete this comment.
-       */
-      authenticated: false,
-      method: null,
-      path: '/'
+      authenticated: true,
+      method: RouteMethod.POST,
+      path: '/posts'
     });
   }
 
@@ -33,7 +25,9 @@ export default class CreatePostRoute extends BaseRoute<PostDocument> {
    */
   middleware() {
     return [
-      // TODO: (13.02) Validate the content by ensuring it is not empty.
+      body('content')
+        .isLength({ min: 1 })
+        .withMessage('Your post cannot be empty.'),
 
       body('type')
         .if((value: PostType) => !!value)
@@ -48,12 +42,14 @@ export default class CreatePostRoute extends BaseRoute<PostDocument> {
    * @returns The newly created post.
    */
   async content(req: CreatePostRequest): Promise<PostDocument> {
-    // TODO: (13.03) Get the content and post type from the request body.
+    const { content, type } = req.body;
 
-    // TODO: (13.04) Create a new post in our database with the specified author,
-    // content, and post type. Then return the post!
+    const post: PostDocument = await Post.create({
+      author: req.user?._id,
+      content,
+      type
+    });
 
-    // TODO: (13.04) Return the post!
-    return null;
+    return post;
   }
 }
