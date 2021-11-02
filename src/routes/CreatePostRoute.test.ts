@@ -4,14 +4,7 @@ import TestUtils from '../utils/TestUtils';
 
 const TEST_POST_CONTENT = 'I have an update for you all!';
 
-/**
- * TODO: (13.05)
- * - Remove the ".skip" from the following function.
- * - Go to your terminal and run the following command:
- *        npm run test CreatePost
- * - Delete this comment.
- */
-describe.skip('POST /posts', () => {
+describe('POST /posts', () => {
   test('If the user is not authenticated, should return a 401.', async () => {
     await TestUtils.agent
       .post('/posts')
